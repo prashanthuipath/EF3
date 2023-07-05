@@ -2,7 +2,6 @@
   <x:Members>
     <x:Property sap2010:Annotation.AnnotationText="Allows the Orchestrator queue name to be passed as an argument, instead of only being defined in the configuration file." Name="in_OrchestratorQueueName" Type="InArgument(x:String)" />
     <x:Property sap2010:Annotation.AnnotationText="Allows the Orchestrator folder name where the queue is created to be passed as an argument, instead of only being defined in the configuration file." Name="in_OrchestratorQueueFolder" Type="InArgument(x:String)" />
-    <x:Property Name="io_JsonFileName" Type="InOutArgument(x:String)" />
     <x:Property Name="io_UiElementOutput" Type="InOutArgument(ui:UiElement)" />
   </x:Members>
   <VisualBasic.Settings>
@@ -259,7 +258,7 @@
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
           <Transition.To>
-            <State x:Name="__ReferenceID2" sap2010:Annotation.AnnotationText="Process a single transaction. &#xA;The result of the processing can be: 1) Success, 2) Business Exception, 3) System Exception. &#xA;In the case of a system exception, the transaction can be automatically retried." DisplayName="Process Transaction" sap:VirtualizedContainerService.HintSize="231.33333333333334,200" sap2010:WorkflowViewState.IdRef="State_3">
+            <State x:Name="__ReferenceID2" sap2010:Annotation.AnnotationText="Process a single transaction. &#xA;The result of the processing can be: 1) Success, 2) Business Exception, 3) System Exception. &#xA;In the case of a system exception, the transaction can be automatically retried." DisplayName="Process Transaction" sap:VirtualizedContainerService.HintSize="636,3289.3333333333335" sap2010:WorkflowViewState.IdRef="State_3">
               <State.Entry>
                 <TryCatch DisplayName="Try to process transaction" sap:VirtualizedContainerService.HintSize="589.3333333333334,2798" sap2010:WorkflowViewState.IdRef="TryCatch_9">
                   <sap:WorkflowViewStateService.ViewState>
@@ -292,7 +291,7 @@
                       </Assign>
                       <Assign DisplayName="Jsn file name Assign" sap:VirtualizedContainerService.HintSize="488.6666666666667,85.33333333333333" sap2010:WorkflowViewState.IdRef="Assign_29">
                         <Assign.To>
-                          <OutArgument x:TypeArguments="x:String">[io_JsonFileName]</OutArgument>
+                          <OutArgument x:TypeArguments="x:String">[strJsonFileName]</OutArgument>
                         </Assign.To>
                         <Assign.Value>
                           <InArgument x:TypeArguments="x:String">[TransactionItem.SpecificContent("FileName").ToString()]</InArgument>
@@ -376,18 +375,42 @@
                             </sap:WorkflowViewStateService.ViewState>
                             <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke SetTransactionStatus (Success)" sap:VirtualizedContainerService.HintSize="388,115.33333333333333" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_26" UnSafe="False" WorkflowFileName="Framework\SetTransactionStatus.xaml">
                               <ui:InvokeWorkflowFile.Arguments>
-                                <InArgument x:TypeArguments="ui:BusinessRuleException" x:Key="in_BusinessException">[Nothing]</InArgument>
-                                <InArgument x:TypeArguments="x:String" x:Key="in_TransactionField1">[TransactionField1]</InArgument>
-                                <InArgument x:TypeArguments="x:String" x:Key="in_TransactionField2">[TransactionField2]</InArgument>
-                                <InArgument x:TypeArguments="x:String" x:Key="in_TransactionID">[TransactionID]</InArgument>
-                                <InArgument x:TypeArguments="s:Exception" x:Key="in_SystemException">[Nothing]</InArgument>
-                                <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[Config]</InArgument>
-                                <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">[TransactionItem]</InArgument>
-                                <InOutArgument x:TypeArguments="x:Int32" x:Key="io_RetryNumber">[RetryNumber]</InOutArgument>
-                                <InOutArgument x:TypeArguments="x:Int32" x:Key="io_TransactionNumber">[TransactionNumber]</InOutArgument>
-                                <InOutArgument x:TypeArguments="x:Int32" x:Key="io_ConsecutiveSystemExceptions">[ConsecutiveSystemExceptions]</InOutArgument>
-                                <InOutArgument x:TypeArguments="x:String" x:Key="io_JsonFileName">[io_JsonFileName]</InOutArgument>
-                                <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_SummaryData">[dt_SummaryData]</InOutArgument>
+                                <InArgument x:TypeArguments="ui:BusinessRuleException" x:Key="in_BusinessException">
+                                  <VisualBasicValue x:TypeArguments="ui:BusinessRuleException" ExpressionText="Nothing" />
+                                </InArgument>
+                                <InArgument x:TypeArguments="x:String" x:Key="in_TransactionField1">
+                                  <VisualBasicValue x:TypeArguments="x:String" ExpressionText="TransactionField1" />
+                                </InArgument>
+                                <InArgument x:TypeArguments="x:String" x:Key="in_TransactionField2">
+                                  <VisualBasicValue x:TypeArguments="x:String" ExpressionText="TransactionField2" />
+                                </InArgument>
+                                <InArgument x:TypeArguments="x:String" x:Key="in_TransactionID">
+                                  <VisualBasicValue x:TypeArguments="x:String" ExpressionText="TransactionID" />
+                                </InArgument>
+                                <InArgument x:TypeArguments="s:Exception" x:Key="in_SystemException">
+                                  <VisualBasicValue x:TypeArguments="s:Exception" ExpressionText="Nothing" />
+                                </InArgument>
+                                <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">
+                                  <VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="Config" />
+                                </InArgument>
+                                <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">
+                                  <VisualBasicValue x:TypeArguments="ui:QueueItem" ExpressionText="TransactionItem" />
+                                </InArgument>
+                                <InOutArgument x:TypeArguments="x:Int32" x:Key="io_RetryNumber">
+                                  <VisualBasicReference x:TypeArguments="x:Int32" ExpressionText="RetryNumber" />
+                                </InOutArgument>
+                                <InOutArgument x:TypeArguments="x:Int32" x:Key="io_TransactionNumber">
+                                  <VisualBasicReference x:TypeArguments="x:Int32" ExpressionText="TransactionNumber" />
+                                </InOutArgument>
+                                <InOutArgument x:TypeArguments="x:Int32" x:Key="io_ConsecutiveSystemExceptions">
+                                  <VisualBasicReference x:TypeArguments="x:Int32" ExpressionText="ConsecutiveSystemExceptions" />
+                                </InOutArgument>
+                                <InArgument x:TypeArguments="x:String" x:Key="in_JsonFileName">
+                                  <VisualBasicValue x:TypeArguments="x:String" ExpressionText="strJsonFileName" />
+                                </InArgument>
+                                <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_SummaryData">
+                                  <VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="dt_SummaryData" />
+                                </InOutArgument>
                               </ui:InvokeWorkflowFile.Arguments>
                             </ui:InvokeWorkflowFile>
                           </Sequence>
@@ -458,7 +481,7 @@
                                   <InOutArgument x:TypeArguments="x:Int32" x:Key="io_RetryNumber">[RetryNumber]</InOutArgument>
                                   <InOutArgument x:TypeArguments="x:Int32" x:Key="io_TransactionNumber">[TransactionNumber]</InOutArgument>
                                   <InOutArgument x:TypeArguments="x:Int32" x:Key="io_ConsecutiveSystemExceptions">[ConsecutiveSystemExceptions]</InOutArgument>
-                                  <InArgument x:TypeArguments="x:String" x:Key="io_JsonFileName">[io_JsonFileName]</InArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="io_JsonFileName">[strJsonFileName]</InArgument>
                                   <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_SummaryData">[dt_SummaryData]</InOutArgument>
                                 </ui:InvokeWorkflowFile.Arguments>
                               </ui:InvokeWorkflowFile>
@@ -522,7 +545,7 @@
                                   <InOutArgument x:TypeArguments="x:Int32" x:Key="io_RetryNumber">[RetryNumber]</InOutArgument>
                                   <InOutArgument x:TypeArguments="x:Int32" x:Key="io_TransactionNumber">[TransactionNumber]</InOutArgument>
                                   <InOutArgument x:TypeArguments="x:Int32" x:Key="io_ConsecutiveSystemExceptions">[ConsecutiveSystemExceptions]</InOutArgument>
-                                  <InArgument x:TypeArguments="x:String" x:Key="io_JsonFileName">[io_JsonFileName]</InArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="io_JsonFileName">[strJsonFileName]</InArgument>
                                   <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_SummaryData">[dt_SummaryData]</InOutArgument>
                                 </ui:InvokeWorkflowFile.Arguments>
                               </ui:InvokeWorkflowFile>
@@ -966,6 +989,7 @@
       <Variable x:TypeArguments="sd:DataTable" sap2010:Annotation.AnnotationText="Used in case transactions are stored in a DataTable, for example, after being retrieved from a spreadsheet." Name="dt_TransactionData" />
       <Variable x:TypeArguments="x:Int32" sap2010:Annotation.AnnotationText="Used to control the number of consecutive system exceptions." Default="0" Name="ConsecutiveSystemExceptions" />
       <Variable x:TypeArguments="sd:DataTable" Name="dt_SummaryData" />
+      <Variable x:TypeArguments="x:String" Name="strJsonFileName" />
     </StateMachine.Variables>
   </StateMachine>
 </Activity>
