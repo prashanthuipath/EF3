@@ -509,7 +509,7 @@
                   <av:PointCollection x:Key="ConnectorLocation">600,569 690,569 690,690.3333333333334 660,690.3333333333334</av:PointCollection>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <Sequence sap2010:Annotation.AnnotationText="If a system exception occurs during the process, the transaction item's status is updated as Failed (Exception Type: Application)." DisplayName="System Exception" sap:VirtualizedContainerService.HintSize="200,180" sap2010:WorkflowViewState.IdRef="Sequence_31">
+              <Sequence sap2010:Annotation.AnnotationText="If a system exception occurs during the process, the transaction item's status is updated as Failed (Exception Type: Application)." DisplayName="System Exception" sap:VirtualizedContainerService.HintSize="500.66666666666674,1718.6666666666667" sap2010:WorkflowViewState.IdRef="Sequence_31">
                 <Sequence.Variables>
                   <Variable x:TypeArguments="x:Boolean" Name="QueueRetry" />
                   <Variable x:TypeArguments="x:String" Name="ScreenshotPath" />
@@ -541,9 +541,15 @@
                   <TryCatch.Try>
                     <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke TakeScreenshot workflow" sap:VirtualizedContainerService.HintSize="334,115.33333333333333" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_13" UnSafe="False" WorkflowFileName="Framework\TakeScreenshot.xaml">
                       <ui:InvokeWorkflowFile.Arguments>
-                        <InArgument x:TypeArguments="x:String" x:Key="in_Folder">[in_Config("ExScreenshotsFolderPath").ToString]</InArgument>
-                        <InOutArgument x:TypeArguments="x:String" x:Key="io_FilePath">[ScreenshotPath]</InOutArgument>
-                        <InOutArgument x:TypeArguments="x:String" x:Key="io_JsonFileName">[in_JsonFileName]</InOutArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_Folder">
+                          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_Config(&quot;ExScreenshotsFolderPath&quot;).ToString" />
+                        </InArgument>
+                        <InOutArgument x:TypeArguments="x:String" x:Key="io_FilePath">
+                          <VisualBasicReference x:TypeArguments="x:String" ExpressionText="ScreenshotPath" />
+                        </InOutArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_JsonFileName">
+                          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_JsonFileName" />
+                        </InArgument>
                       </ui:InvokeWorkflowFile.Arguments>
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">

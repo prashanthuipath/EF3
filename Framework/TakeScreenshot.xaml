@@ -2,12 +2,12 @@
   <x:Members>
     <x:Property sap2010:Annotation.AnnotationText="Path to the folder where the screenshot should be saved." Name="in_Folder" Type="InArgument(x:String)" />
     <x:Property sap2010:Annotation.AnnotationText="Optional argument that specifies the path and the name of the screenshot to be taken." Name="io_FilePath" Type="InOutArgument(x:String)" />
-    <x:Property Name="io_JsonFileName" Type="InOutArgument(x:String)" />
+    <x:Property Name="in_JsonFileName" Type="InArgument(x:String)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>565.3333333333334,1458</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>567.3333333333334,1458</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>TakeScreenshot_2</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -119,7 +119,7 @@
             <OutArgument x:TypeArguments="x:String">[io_FilePath]</OutArgument>
           </Assign.To>
           <Assign.Value>
-            <InArgument x:TypeArguments="x:String">[Path.Combine(in_Folder, io_JsonFileName+"ExceptionScreenshot_"+Now.ToString("yy-MM-dd- hhmmss")+".png")]</InArgument>
+            <InArgument x:TypeArguments="x:String">[Path.Combine(in_Folder, in_JsonFileName+"ExceptionScreenshot_"+Now.ToString("yy-MM-dd- hhmmss")+".png")]</InArgument>
           </Assign.Value>
         </Assign>
       </If.Then>
